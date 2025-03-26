@@ -37,7 +37,12 @@ runs:
 
 ## Tips
 
-Cuando calculamos la key de la caché, debemos tener en cuenta nuestro archivo package-lock.json que se encuentra en el directorio de trabajo proporcionado. No debemos mirar todos los archivos package-lock.json, ya que puede haber más de un proyecto dentro de nuestro repositorio (que es en realidad el caso para nosotros), y esto puede llevar a cambios incorrectos en la key de la caché debido a cambios en archivos no relacionados. Para hashear archivos y usar el directorio de trabajo proporcionado desde una expresión, puedes usar la siguiente sintaxis: your-key-prefix-${{ hashFiles(format('{0}/{1}', inputs.working-dir, 'package-lock.json')) }}.
+Cuando calculamos la key de la caché, debemos tener en cuenta nuestro archivo package-lock.json que se encuentra en el directorio de trabajo proporcionado. No debemos mirar todos los archivos package-lock.json, ya que puede haber más de un proyecto dentro de nuestro repositorio (que es en realidad el caso para nosotros), y esto puede llevar a cambios incorrectos en la key de la caché debido a cambios en archivos no relacionados. 
+
+Para hashear archivos y usar el directorio de trabajo proporcionado desde una expresión, puedes usar la siguiente sintaxis: 
+```yaml
+your-key-prefix-${{ hashFiles(format('{0}/{1}', inputs.working-dir, 'package-lock.json')) }}.
+```
 
 Para ejecutar un step dentro de un directorio de trabajo proporcionado, puedes usar la siguiente sintaxis:
 ```yaml
